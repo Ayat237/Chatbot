@@ -1,12 +1,14 @@
-import { sendMessageToChatGPT } from "../services/chatgpt.service.js";
+import { errorHandler } from "../middlewares/error-handling.middleware.js";
+import { ChatGPTService } from "../services/chatgpt.service.js";
 import { ErrorClass } from "../utils/error-class.utils.js";
 
+const chatService = new ChatGPTService();
 
 export const handleMessage = async (userMessage) => {
-    const response = await sendMessageToChatGPT(userMessage);
-    console.log('Response from ChatGPT:  ', response);
-    return response;
-};
+        const response = await chatService.sendMessage(userMessage);
+        console.log('Response from ChatGPT:  ', response);
+        return response;
+    }    
 
 export const handleChatbot = async(req, res, next)=>{
     
