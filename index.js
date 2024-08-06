@@ -1,12 +1,9 @@
+import './src/config/dotenv.config.js'
 import express from 'express'
-import { config } from 'dotenv'
 
 import { ErrorClass } from './src/utils/error-class.utils.js';
 import { globaleResponse } from './src/middlewares/error-handling.middleware.js';
 import  chatRouter from './src/modules/chatbot.routes.js'
-
-config();
-
 
 const app = express()
 const port = process.env.PORT || 5000
