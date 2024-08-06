@@ -1,6 +1,9 @@
-import { userModel } from "../../../DB/Model/user.model.js";
+import UserModel from "../../../db/models/user.model.js";
+import database from "../../../db/databaseConnection.js";
+
 import { ErrorClass } from "../../utils/error-class.utils.js";
 
+const userModel = new UserModel(database);
 /**
  * @param {Object} req
  * @param {Object} res
