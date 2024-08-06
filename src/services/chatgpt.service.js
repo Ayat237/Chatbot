@@ -1,11 +1,10 @@
-import { errorHandler } from '../middlewares/error-handling.middleware.js';
-import ChatPlatform from '../interfaces/chatPlatform.interface.js';
-import { Roles } from '../utils/enums.utils.js';
-import { getMessages } from './messageManager.service.js';
+import ChatPlatform from "../interfaces/chatPlatform.interface.js";
+import { Roles } from "../utils/enums.utils.js";
+import { getMessages } from "./messageManager.service.js";
 
 /**
  * @param {} userId
- * @param {} message 
+ * @param {} message
  * @returns {object} message
  * @description send message to OpenAI server and return respnse object
  */
@@ -17,34 +16,30 @@ export class ChatGPTService extends ChatPlatform {
 
   async sendMessage(userId, UserMessage) {
     try {
-      // get previous messages of user ; 
-      const  previousMessages = await getMessages(userId);
+      // get previous messages of user ;
+      const previousMessages = await getMessages(userId);
 
-      // create context for chatbot to understand the user's previous messages ; 
-      const context =  previousMessages.map(msg =>(
-        {
-          role : msg.role === Roles.USER ? Roles.USER : Roles.ASSISTANT,
-          content : msg.message,
-        }))
+      // create context for chatbot to understand the user's previous messages ;
+      const context = previousMessages.map((msg) => ({
+        role: msg.role === Roles.USER ? Roles.USER : Roles.ASSISTANT,
+        content: msg.message,
+      }));
 
-        
       // add new message of user ;
       context.push({
         role: Roles.USER,
-        content : UserMessage,
+        content: UserMessage,
       });
-      
+
       // send message to OpenAI server and get response ;
       const response = await this.openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: context,
-      }); 
-      
-      
-      return response.choices[0].message.content;
+      });
 
+      return response.choices[0].message.content;
     } catch (error) {
-      console.error('Error in sending message:', error);
+      console.error("Error in sending message:", error);
       throw error;
     }
   }
