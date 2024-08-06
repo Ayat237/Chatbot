@@ -1,6 +1,5 @@
 import { errorHandler } from '../middlewares/error-handling.middleware.js';
 import ChatPlatform from '../interfaces/chatPlatform.interface.js';
-import openai from '../config/openai.config.js';
 
 
 /**
@@ -26,9 +25,14 @@ import openai from '../config/openai.config.js';
 
 
 export class ChatGPTService extends ChatPlatform {
+  constructor(openaiInstance) {
+    super();
+    this.openai = openaiInstance;
+  }
+
   async sendMessage(message) {
     try {
-      const response = await openai.chat.completions.create({
+      const response = await this.openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [{ role: "user", content: message }],
       });
