@@ -1,40 +1,45 @@
-import { errorHandler } from '../middlewares/error-handling.middleware.js';
-import ChatPlatform from '../interfaces/chatPlatform.interface.js';
-import openai from '../config/openai.config.js';
-
+import ChatPlatform from "../interfaces/chatPlatform.interface.js";
+import { Roles } from "../utils/enums.utils.js";
+import { getMessages } from "./messageManager.service.js";
 
 /**
- * @param {*} message 
+ * @param {} userId
+ * @param {} message
  * @returns {object} message
  * @description send message to OpenAI server and return respnse object
  */
-// export const sendMessageToOpenAi = errorHandler(
-//   async (message) => {
-  
-//     const response = await openai.chat.completions.create({
-//            model: "gpt-4o-mini",
-//            messages: [{ role: "user", content: message }],
-//        });
-//        return response.choices[0].message.content;
-//    }
-// )
-// export class ChatGPTService extends ChatPlatform {
-//   async sendMessage(message) {
-//     return sendMessageToOpenAi(message);
-//   }
-// }
-
-
 export class ChatGPTService extends ChatPlatform {
-  async sendMessage(message) {
+  constructor(openaiInstance) {
+    super();
+    this.openai = openaiInstance;
+  }
+
+  async sendMessage(userId, UserMessage) {
     try {
-      const response = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: message }],
+      // get previous messages of user ;
+      const previousMessages = getMessages(userId);
+
+      // create context for chatbot to understand the user's previous messages ;
+      const context = previousMessages.map((msg) => ({
+        role: msg.role === Roles.USER ? Roles.USER : Roles.ASSISTANT,
+        content: msg.message,
+      }));
+
+      // add new message of user ;
+      context.push({
+        role: Roles.USER,
+        content: UserMessage,
       });
+
+      // send message to OpenAI server and get response ;
+      const response = await this.openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: context,
+      });
+
       return response.choices[0].message.content;
     } catch (error) {
-      console.error('Error in sending message:', error);
+      console.error("Error in sending message:", error);
       throw error;
     }
   }

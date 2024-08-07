@@ -1,6 +1,5 @@
 import { ErrorClass } from "../utils/error-class.utils.js";
 
-
 export const errorHandler = (API) => {
   return (req, res, next) => {
     API(req, res, next)?.catch((err) => {
