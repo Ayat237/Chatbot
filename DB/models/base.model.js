@@ -11,7 +11,6 @@ class BaseModel {
     async findById(id) {
       return await this.database.findById(this.collectionName, id);
     }
-  
     // Other common operations...
   }
   

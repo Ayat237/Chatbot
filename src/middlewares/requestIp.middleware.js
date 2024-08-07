@@ -12,8 +12,7 @@ const UsertIp = ()=>{
         if (!userIp) {
             return next(new ErrorClass("User Ip not found",400));
         }
-        req.userId = userIp;
-        console.log("Ip :",userIp);    
+        req.userId = userIp;  
         next();
     }
 }

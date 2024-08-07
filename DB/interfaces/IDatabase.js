@@ -22,6 +22,11 @@ class IDatabase {
     async getInteractionHistory() {
       throw new Error("Method 'getInteractionHistory()' must be implemented.");
   }
+
+    async getUniqueIps() {
+      throw new Error("Method 'getUniqueIps()' must be implemented.");
+  }
+
   }
   
-  export default IDatabase;
+export default IDatabase;

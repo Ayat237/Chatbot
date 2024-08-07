@@ -46,10 +46,28 @@ export const handleChatbot = async (req, res, next) => {
 
   await saveMessage(userId, Roles.ASSISTANT, responseMessage);
 
+  return res.status(200).json({
+    response: responseMessage,
+  });
+};
+
+/**
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Object} next
+ * @returns {Object}  chatHistory
+ * @api {get} /chat/history  retrieve chat history
+ */
+export const getChatHistory = async(req, res, next) => {
+  const userId = req.userId;
+  
+  if (!userId) {
+    return next(new ErrorClass("User ID is required", 404));
+  }
+
   const messages = await getMessages(userId);
 
   return res.status(200).json({
-    response: responseMessage,
     chatHistory: messages,
   });
-};
+}

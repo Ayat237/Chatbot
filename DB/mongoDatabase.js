@@ -62,6 +62,16 @@ class MongooseDatabase extends IDatabase {
       throw error;
     }
   }
+
+  async getUniqueIps() {
+    try {
+      const uniqueIps = await this.models.interaction.distinct('ip');
+      return uniqueIps;
+    } catch (error) {
+      console.error("Error fetching uniqueIps:", error.message);
+      throw error;
+    }
+}
 }
 
 export default MongooseDatabase;

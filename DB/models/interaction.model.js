@@ -22,11 +22,14 @@ export class InteractionModel extends BaseModel {
         super(database, "interaction");
     }
 
-    //TODO : any additional methods to be added
     async getInteractionHistory() {
         const interactions = await this.database.getInteractionHistory();
         return interactions;
     }
- 
+
+    async getUniqueIps() {
+        const uniqueIPs = await this.database.getUniqueIps();
+        return uniqueIPs;
+    }
 }
 
