@@ -1,6 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
-
+import cors from "cors";
 import { ErrorClass } from "./src/utils/error-class.utils.js";
 import { globaleResponse } from "./src/middlewares/error-handling.middleware.js";
 import chatRouter from "./src/modules/chatbot/chatbot.routes.js";
@@ -11,7 +11,7 @@ config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-
+app.use(cors({origin: "http://localhost:3000"}));
 app.use(express.json());
 app.use("/chat", chatRouter);
 app.use("/user", userRouter);
