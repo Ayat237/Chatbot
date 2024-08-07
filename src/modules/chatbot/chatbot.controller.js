@@ -5,7 +5,7 @@ import openai from "../../config/openai.config.js";
 import database from "../../../db/databaseConnection.js";
 
 //models
-import UserModel from "../../../DB/models/user.model.js";
+import { UserModel } from "../../../db/models/user.model.js";
 
 //Utils
 import { ChatGPTService } from "../../services/chatgpt.service.js";
@@ -40,7 +40,7 @@ export const handleChatbot = async (req, res, next) => {
   
 
   if (!userId || !message) {
-    return next(new ErrorClass("message are required", 404));
+    return next(new ErrorClass("message is required", 404));
   }
 
   // Save the user's message in the database

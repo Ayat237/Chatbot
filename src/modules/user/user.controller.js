@@ -1,5 +1,5 @@
 import database from "../../../db/databaseConnection.js";
-import UserModel from "../../../DB/models/user.model.js";
+import { UserModel } from "../../../db/models/user.model.js";
 
 import { ErrorClass } from "../../utils/error-class.utils.js";
 

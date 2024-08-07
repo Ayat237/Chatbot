@@ -1,8 +1,6 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { Roles } from "../../src/utils/enums.utils.js";
 import BaseModel from "./base.model.js";
-
-
 
 const  messageSchema = new Schema({
     userId :{
@@ -22,13 +20,17 @@ const  messageSchema = new Schema({
     timestamps: true
 })
 
+const Message = model("Message", messageSchema);
 
 class MessageModel extends BaseModel {
     constructor(database) {
-      super(database, "Message", messageSchema);
+        super(database, "message");
     }
-  
-    // Additional message-specific methods...
+    
+    async getUserMessageHistory(userId) {
+        const messages = await this.database.getUserMessageHistory(userId);
+        return messages;
+    }
 }
   
-export default MessageModel;
+export { MessageModel, Message };

@@ -15,7 +15,9 @@ class IDatabase {
       throw new Error("Method 'findById()' must be implemented.");
     }
   
-    // Additional methods like update, delete, etc.
+    async getUserMessageHistory (userId, sortDirection = "asc") {
+      throw new Error("Method 'getUserMessageHistory()' must be implemented.");
+    }
   }
   
   export default IDatabase;

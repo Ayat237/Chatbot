@@ -14,11 +14,10 @@ export class ChatGPTService extends ChatPlatform {
     this.openai = openaiInstance;
   }
 
-  async sendMessage(userId, UserMessage) {
+  async sendMessage(userId, userMessage) {
     try {
       // get previous messages of user ;
-      const previousMessages = getMessages(userId);
-
+      const previousMessages = await getMessages(userId);
       // create context for chatbot to understand the user's previous messages ;
       const context = previousMessages.map((msg) => ({
         role: msg.role === Roles.USER ? Roles.USER : Roles.ASSISTANT,
@@ -28,7 +27,7 @@ export class ChatGPTService extends ChatPlatform {
       // add new message of user ;
       context.push({
         role: Roles.USER,
-        content: UserMessage,
+        content: userMessage,
       });
 
       // send message to OpenAI server and get response ;

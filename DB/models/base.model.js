@@ -1,17 +1,15 @@
-import mongoose from "mongoose";
-
 class BaseModel {
-    constructor(database, modelName, schema) {
+    constructor(database, collectionName) {
       this.database = database;
-      this.model = mongoose.models[modelName] || mongoose.model(modelName, schema);
+      this.collectionName = collectionName;
     }
   
     async create(data) {
-      return await this.database.create(this.model, data);
+      return await this.database.createDocument(this.collectionName, data);
     }
   
     async findById(id) {
-      return await this.database.findById(this.model, id);
+      return await this.database.findById(this.collectionName, id);
     }
   
     // Other common operations...

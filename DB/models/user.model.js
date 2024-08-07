@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import BaseModel from "./base.model.js";
 
 const userSchema = new Schema(
@@ -28,12 +28,14 @@ const userSchema = new Schema(
   }
 );
 
+const User = model("User", userSchema);
+
 class UserModel extends BaseModel {
   constructor(database) {
-    super(database, "User", userSchema);
+    super(database, "user");
   }
 
   // Additional user-specific methods...
 }
 
-export default UserModel;
+export { UserModel, User };
