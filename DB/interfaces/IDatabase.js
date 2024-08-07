@@ -18,6 +18,10 @@ class IDatabase {
     async getUserMessageHistory (userId, sortDirection = "asc") {
       throw new Error("Method 'getUserMessageHistory()' must be implemented.");
     }
+
+    async getInteractionHistory() {
+      throw new Error("Method 'getInteractionHistory()' must be implemented.");
+  }
   }
   
   export default IDatabase;

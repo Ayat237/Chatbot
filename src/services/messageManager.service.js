@@ -1,5 +1,6 @@
 import database from "../../db/databaseConnection.js";
-import { MessageModel } from "../../db/models/message.model.js";
+import { MessageModel } from "../../DB/models/message.model.js";
+
 
 
 const messageModel = new MessageModel(database)

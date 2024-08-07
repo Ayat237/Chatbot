@@ -4,8 +4,7 @@ import openai from "../../config/openai.config.js";
 // Database connection
 import database from "../../../db/databaseConnection.js";
 
-//models
-import { UserModel } from "../../../db/models/user.model.js";
+
 
 //Utils
 import { ChatGPTService } from "../../services/chatgpt.service.js";
@@ -20,7 +19,7 @@ import {
 
 
 
-const userModel = new UserModel(database)
+
 const chatGPTService = new ChatGPTService(openai);
 
 // Can be later be made as a standalone service containing all available platforms

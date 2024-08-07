@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 import { Roles } from "../../src/utils/enums.utils.js";
 import BaseModel from "./base.model.js";
 
@@ -20,7 +20,7 @@ const  messageSchema = new Schema({
     timestamps: true
 })
 
-const Message = model("Message", messageSchema);
+const Message = mongoose.models.Message || model("Message", messageSchema);
 
 class MessageModel extends BaseModel {
     constructor(database) {

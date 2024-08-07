@@ -2,14 +2,15 @@
 import mongoose from "mongoose";
 import IDatabase from "./interfaces/IDatabase.js";
 import { Message } from "./models/message.model.js";
-import { User } from "./models/user.model.js";
+import { Interaction } from "./models/interaction.model.js";
+
 
 class MongooseDatabase extends IDatabase {
   constructor(uri) {
     super();
     this.uri = uri;
     this.models = {
-      user: User,
+      interaction : Interaction,
       message: Message,
     };
   }
@@ -48,6 +49,16 @@ class MongooseDatabase extends IDatabase {
       return messages;
     } catch (error) {
       console.error("Error fetching messages:", error.message);
+      throw error;
+    }
+  }
+
+  async getInteractionHistory() {
+    try {
+      const interactions = await this.models.interaction.find({});
+      return interactions;
+    } catch (error) {
+      console.error("Error fetching interactions:", error.message);
       throw error;
     }
   }
