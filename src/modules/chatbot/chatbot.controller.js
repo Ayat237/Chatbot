@@ -35,29 +35,22 @@ const chatService = chatGPTService;
  */
 export const handleChatbot = async (req, res, next) => {
   const { message } = req.body;
-  const userId = req.userId
-  console.log("userId: ", userId);
-  
+  const userId = req.userId;  
 
   if (!userId || !message) {
     return next(new ErrorClass("message is required", 404));
   }
 
-  // Save the user's message in the database
   await saveMessage(userId, Roles.USER, message);
 
   const responseMessage = await chatService.sendMessage(userId, message);
 
-  // Save the assistant's response in the database
   await saveMessage(userId, Roles.ASSISTANT, responseMessage);
 
-  //retrieve the message from the database
-  const Messages =  getMessages(userId);
-
-  console.log("Response sent to client:  ", responseMessage);
+  const messages = await getMessages(userId);
 
   return res.status(200).json({
     response: responseMessage,
-    chatHistory: Messages,
+    chatHistory: messages,
   });
 };

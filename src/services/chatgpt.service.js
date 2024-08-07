@@ -16,21 +16,18 @@ export class ChatGPTService extends ChatPlatform {
 
   async sendMessage(userId, userMessage) {
     try {
-      // get previous messages of user ;
       const previousMessages = await getMessages(userId);
-      // create context for chatbot to understand the user's previous messages ;
+
       const context = previousMessages.map((msg) => ({
         role: msg.role === Roles.USER ? Roles.USER : Roles.ASSISTANT,
         content: msg.message,
       }));
 
-      // add new message of user ;
       context.push({
         role: Roles.USER,
         content: userMessage,
       });
 
-      // send message to OpenAI server and get response ;
       const response = await this.openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: context,
