@@ -6,6 +6,9 @@
   "type": "module",
   "scripts": {
     "start" :"node index.js"
+  }, 
+  "engines": {
+    "node": "20.12.2"
   },
   "keywords": [],
   "author": "",
