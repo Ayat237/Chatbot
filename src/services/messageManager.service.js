@@ -1,4 +1,4 @@
-import database from "../../db/databaseConnection.js";
+import {database} from "../../DB/databaseConnection.js";
 import { MessageModel } from "../../DB/models/message.model.js";
 
 

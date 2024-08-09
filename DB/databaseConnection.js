@@ -1,7 +1,8 @@
-import MongoDatabase from "./mongoDatabase.js";
+import MongooseDatabase from "./mongoDatabase.js";
 
-const database = new MongoDatabase(process.env.DB_URI);
+
+const database = new MongooseDatabase(process.env.DB_URI);
 
 database.connect();
 
-export default database;
+export {database};

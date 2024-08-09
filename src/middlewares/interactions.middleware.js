@@ -1,4 +1,4 @@
-import database from "../../db/databaseConnection.js";
+import {database} from "../../DB/databaseConnection.js";
 import { InteractionModel } from "../../DB/models/interaction.model.js";
 
 const Interaction = new InteractionModel(database);

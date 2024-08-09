@@ -2,11 +2,9 @@
 import openai from "../../config/openai.config.js";
 
 // Database connection
-import database from "../../../db/databaseConnection.js";
+// import {database} from "../../../DB/databaseConnection.js";
 
-
-
-//Utils
+// Utils
 import { ChatGPTService } from "../../services/chatgpt.service.js";
 import { Roles } from "../../utils/enums.utils.js";
 import { ErrorClass } from "../../utils/error-class.utils.js";
