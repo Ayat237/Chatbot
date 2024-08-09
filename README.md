@@ -37,13 +37,13 @@ npm install
 Create a .env file in the root directory of the project. Add the following environment variables:
  .env
 
-# Application Port
+### Application Port
 PORT=5000
 
-# MongoDB Connection URI
+### MongoDB Connection URI
 DB_URI =mongodb+srv://Ayat237:o2xwul62PHE2TVXW@chatbot.nhy5j.mongodb.net/Chatbot
 
-# OpenAI API Key
+### OpenAI API Key
 OPENAI_API_KEY=your-openai-api-key
 
 4. **Run the Application**
