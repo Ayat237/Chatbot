@@ -16,7 +16,7 @@ export const createApp = () => {
   app.use(express.json());
   app.use("/chat", chatRouter);
   app.use("/analatyics", interactionRouter);
-  app.use("/", (req, res, next) =>
+  app.get("/", (req, res, next) =>
     res.status(200).json({
       status: "success",
       message: "Server is running",
