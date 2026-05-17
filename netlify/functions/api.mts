@@ -32,10 +32,15 @@ export default async (req: Request, context: Context) => {
     ? undefined
     : await req.text();
 
+  const basePath = "/.netlify/functions/api";
+  const requestPath = url.pathname.startsWith(basePath)
+    ? url.pathname.slice(basePath.length) || "/"
+    : url.pathname;
+
   const result = await handler(
     {
       httpMethod: req.method,
-      path: url.pathname,
+      path: requestPath,
       headers,
       queryStringParameters,
       body,
